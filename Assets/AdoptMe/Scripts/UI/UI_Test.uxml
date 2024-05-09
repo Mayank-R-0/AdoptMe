@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" hr="Highrise.UI" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AdoptMe/Scripts/UI/UI_Test.uss?fileID=7433441132597879392&amp;guid=c5285eb330d03f244ad140dfe7b573c6&amp;type=3#UI_Test" />
+    <ui:VisualElement name="MainContainer" class="MainContainer">
+        <ui:VisualElement name="ChoicePanelContainer" class="ChoicePanelContainer">
+            <ui:VisualElement name="ChoicePanel" class="ChoicePanel">
+                <ui:Label tabindex="-1" text="Choose a role :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PanelTitle" class="PanelTitle" />
+                <ui:VisualElement name="ButtonContainer" class="ButtonContainer">
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent" class="B_Parent">
+                        <ui:VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
+                            <ui:VisualElement name="ParentIcon" class="ParentIcon" />
+                            <ui:Label tabindex="-1" text="Parent&#10;Adopt a Baby!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent_Title" class="B_Parent_Title" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby" class="B_Baby">
+                        <ui:VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
+                            <ui:VisualElement name="BabyIcon" class="BabyIcon" />
+                            <ui:Label tabindex="-1" text="Baby&#10;Get adopted!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby_Title" class="B_Baby_Title" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="UnityEngine.UIElements"
+    xmlns:hr="Highrise.UI"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+>
+
+  <hr:UILuaView class="-main">
+    <VisualElement name="MainContainer" class="MainContainer">
+        <VisualElement name="ChoicePanelContainer" class="ChoicePanelContainer">
+            <VisualElement name="ChoicePanel" class="ChoicePanel">
+                <hr:UILabel tabindex="-1" text="Choose a role :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PanelTitle" class="PanelTitle" />
+                <VisualElement name="ButtonContainer" class="ButtonContainer">
+                    <hr:UIButton text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent" class="B_Parent">
+                        <VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
+                            <VisualElement name="ParentIcon" class="ParentIcon" />
+                            <hr:UILabel tabindex="-1" text="Parent&#10;Adopt a Baby!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent_Title" class="B_Parent_Title" />
+                        </VisualElement>
+                    </hr:UIButton>
+                    <hr:UIButton text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby" class="B_Baby">
+                        <VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
+                            <VisualElement name="BabyIcon" class="BabyIcon" />
+                            <hr:UILabel tabindex="-1" text="Baby&#10;Get adopted!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby_Title" class="B_Baby_Title" />
+                        </VisualElement>
+                    </hr:UIButton>
+                </VisualElement>
+            </VisualElement>
+        </VisualElement>
+    </VisualElement>
+  </hr:UILuaView>
+
+</UXML>
+
+    
