@@ -1,24 +1,30 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" hr="Highrise.UI" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AdoptMe/Scripts/UI/UI_Test.uss?fileID=7433441132597879392&amp;guid=c5285eb330d03f244ad140dfe7b573c6&amp;type=3#UI_Test" />
-    <ui:VisualElement name="MainContainer" class="MainContainer">
-        <ui:VisualElement name="ChoicePanelContainer" class="ChoicePanelContainer">
-            <ui:VisualElement name="ChoicePanel" class="ChoicePanel">
-                <ui:Label tabindex="-1" text="Choose a role :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PanelTitle" class="PanelTitle" />
-                <ui:VisualElement name="ButtonContainer" class="ButtonContainer">
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent" class="B_Parent">
-                        <ui:VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
-                            <ui:VisualElement name="ParentIcon" class="ParentIcon" />
-                            <ui:Label tabindex="-1" text="Parent&#10;Adopt a Baby!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent_Title" class="B_Parent_Title" />
+    <ui:VisualElement name="MainContainer" style="flex-grow: 1; justify-content: flex-start; align-items: stretch; display: flex; visibility: visible; overflow: visible; position: relative; flex-direction: column; flex-wrap: nowrap; align-self: auto; -unity-text-align: upper-left;">
+        <ui:VisualElement name="ChoicePanelContainer" style="flex-grow: 1; align-items: center; justify-content: center;">
+            <ui:VisualElement name="ChoicePanel" style="flex-grow: 1; position: absolute; width: 550px; height: 330px; background-color: rgb(255, 255, 255); flex-direction: column; flex-wrap: nowrap; display: flex; visibility: visible; overflow: visible; align-items: stretch; justify-content: flex-start; align-self: auto;">
+                <ui:Label tabindex="-1" text="Choose a role :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PanelTitle" style="font-size: 40px; -unity-font-style: bold; -unity-text-align: middle-center; position: absolute; width: 550px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 60px;" />
+                <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: row; position: absolute; align-self: center; top: 80px;">
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent" style="width: 200px; height: 200px; margin-top: 0; margin-right: 20px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(149, 149, 149); border-right-color: rgb(149, 149, 149); border-top-color: rgb(149, 149, 149); border-bottom-color: rgb(149, 149, 149); background-color: rgba(188, 188, 188, 0);">
+                        <ui:VisualElement style="flex-grow: 1;">
+                            <ui:VisualElement name="B_ParentIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/AdoptMe/Assets/UI/Parent.png?fileID=2800000&amp;guid=985d6deaf57c84a49bb81b72c043b906&amp;type=3#Parent&quot;); width: 150px; height: 150px; position: absolute; align-self: center;" />
+                            <ui:Label tabindex="-1" text="Parent&#10;Adopt a Baby!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Parent_Title" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 18px; position: absolute; top: 145px; align-self: center; -unity-font-style: bold; -unity-text-align: middle-center;" />
                         </ui:VisualElement>
                     </ui:Button>
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby" class="B_Baby">
-                        <ui:VisualElement style="flex-grow: 1; background-image: none; width: auto; height: auto; position: relative; align-self: stretch;">
-                            <ui:VisualElement name="BabyIcon" class="BabyIcon" />
-                            <ui:Label tabindex="-1" text="Baby&#10;Get adopted!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby_Title" class="B_Baby_Title" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby" style="width: 200px; height: 200px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(149, 149, 149); border-right-color: rgb(149, 149, 149); border-top-color: rgb(149, 149, 149); border-bottom-color: rgb(149, 149, 149); background-color: rgba(188, 188, 188, 0);">
+                        <ui:VisualElement style="flex-grow: 1;">
+                            <ui:VisualElement name="B_BabyIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/AdoptMe/Assets/UI/Baby.png?fileID=2800000&amp;guid=db19846b605cf284783bba88983f41c3&amp;type=3#Baby&quot;); width: 130px; height: 130px; position: absolute; align-self: center; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                            <ui:Label tabindex="-1" text="Baby&#10;Get adopted!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B_Baby_Title" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 18px; position: absolute; top: 145px; align-self: center; -unity-font-style: bold; -unity-text-align: middle-center;" />
                         </ui:VisualElement>
                     </ui:Button>
                 </ui:VisualElement>
             </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="PlayerPopup" style="flex-grow: 1; position: relative; width: 300px; height: 150px; align-items: center; justify-content: center; display: flex; align-self: auto;">
+        <ui:VisualElement style="flex-grow: 1; position: absolute;">
+            <ui:Label tabindex="-1" text="NewPlayer" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerName" style="font-size: 30px; align-items: stretch; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
+            <ui:Button text="Invite To Family" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 20px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; font-size: 20px; -unity-font-style: bold;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

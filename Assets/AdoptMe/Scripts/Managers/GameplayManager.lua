@@ -1,11 +1,21 @@
 local players = {}
 
+local families = {}
+
+local myFamily = nil
+
 local Events = require("Events")
 
 --!SerializeField
 local UIManager : GameObject = nil
 
 local RoleUpdateRequest = Event.new("RoleUpdateRequest")
+
+local CreateFamilyRequest = Event.new("CreateFamilyRequest")
+local CreateFamilyResponse = Event.new("CreateFamilyResponse")
+
+local InviteFamilyRequest = Event.new("InviteFamilyRequest")
+local InviteFamilyEvent = Event.new("InviteFamilyEvent")
 
 function trackPlayers(characterCallback)
     
@@ -45,6 +55,23 @@ function bindServerFiredEventsOnClient()
         UIManager:GetComponent("UI_Main"):enableChoicePanel()
     end)
 
+    CreateFamilyResponse:Connect(function(familyOwner, familyInfo)
+        if familyOwner ~= client.localPlayer then return end
+        print("familyCreated", familyInfo.familyName)
+
+        myFamily = familyInfo
+    end)
+
+    InviteFamilyEvent:Connect(function(FromPlayer, ToPlayer)
+        if ToPlayer ~= client.localPlayer then return end
+        
+        print("Show invitation request on UI")
+        print("Family request from player : ", FromPlayer.name)
+
+
+
+    end)
+
 end
 
 function self:ClientAwake()
@@ -71,6 +98,14 @@ function self:ClientAwake()
 
     end
 
+    function CharacterClicked(clickedPlayer)
+        UIManager:GetComponent("UI_Main").AddInvitePopup(clickedPlayer)
+    end
+
+    function CreateFamilyFromClient(familyName)
+        CreateFamilyRequest:FireServer(familyName)
+    end
+
     trackPlayers(OnCharacterInstantiate)
     Events.getEvent("ClientConnectionRequest"):FireServer()
 end
@@ -87,6 +122,22 @@ function bindClientFiredRequestsOnServer()
         local playerInfo = players[player]
         playerInfo.role.value = role
 
+    end)
+
+    CreateFamilyRequest:Connect(function(familyOwner, familyName)
+            families[familyName] = {
+                familyName = familyName,
+                familyId = tostring(familyName) .. tostring(math.random(0, 1000)),
+                familyMembers = {
+                    familyOwner
+                }
+            }
+            local familyInfo = families[familyName]
+            CreateFamilyResponse:FireAllClients(familyOwner, familyInfo)
+    end)
+
+    InviteFamilyRequest:Connect(function(FromPlayer, ToPlayer)
+        InviteFamilyEvent:FireAllClients(FromPlayer, ToPlayer)
     end)
 
 end

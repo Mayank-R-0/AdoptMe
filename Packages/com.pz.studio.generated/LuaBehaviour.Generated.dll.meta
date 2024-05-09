@@ -4,6 +4,8 @@ PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap:
+    Highrise.Lua.Generated.AMPlayerCharacterController: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
+      type: 3}
     Highrise.Lua.Generated.AnchorOld: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
       type: 3}
     Highrise.Lua.Generated.CharacterSpawner: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
@@ -19,6 +21,8 @@ PluginImporter:
     Highrise.Lua.Generated.PlayerCharacterController: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
       type: 3}
     Highrise.Lua.Generated.PlayerCharacterSpawner: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
+      type: 3}
+    Highrise.Lua.Generated.PlayerUI: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
       type: 3}
     Highrise.Lua.Generated.RTSCamera: {fileID: 2800000, guid: 7b17fa3987cfb1748a297e97f9214051,
       type: 3}

@@ -1,0 +1,17 @@
+.player-u-i {
+    flex-grow: 1;
+}
+
+.player-u-i #MainContainer{
+    flex-direction : column;
+    padding : 10px;
+    justify-content : space-between;
+}
+
+.player-u-i #PlayerName {
+    font-size : 40px
+}
+
+.player-u-i #InviteButton {
+    margin-top : 10px
+}
