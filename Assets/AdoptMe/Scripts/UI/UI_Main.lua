@@ -59,19 +59,46 @@ end
 
 function CreateFamilyClicked()
     print("CreateFamilyClicked")
-    GameplayManager:CreateFamilyFromClient("MyNewFamily")
+    GameplayManager.CreateFamilyFromClient("MyNewFamily")
+    CreateFamily.visible = false
 end
 
 function InviteFamilyClicked()
     print("InviteFamilyClicked")
+    GameplayManager.InviteFamilyFromClient("MyNewFamily")
+    Invite.visible = false
 end
 
 function AcceptInviteClicked()
     print("AcceptInviteClicked")
+    GameplayManager.AcceptInviteFromClient()
+    AcceptInvite.visible = false
 end
 
 function LeaveFamilyClicked()
     print("LeaveFamilyClicked")
+    GameplayManager.LeaveFamilyFromClient()
+    LeaveFamily.visible = false
+end
+
+function SetInviteStateOpen(inviteTo)
+    Button2Text:SetPrelocalizedText("Invite To Family : " .. inviteTo, false)
+    Invite.visible = true
+end
+
+function SetAcceptInviteStateOpen(invitedBy, invitedToFamily)
+    Button3Text:SetPrelocalizedText("Accept Invite from " .. invitedBy .. "To" .. invitedToFamily , false)
+    AcceptInvite.visible = true
+end
+
+function SetLeaveStateOpen(familyName)
+    Button4Text:SetPrelocalizedText("Leave " .. familyName, false)
+    CreateFamily.visible = false
+    LeaveFamily.visible = true
+end
+
+function SetCreateFamilyStateOpen()
+    CreateFamily.visible = true
 end
 
 function self:ClientAwake()
@@ -89,4 +116,7 @@ function self:ClientAwake()
     Invite:RegisterPressCallback(InviteFamilyClicked)
     AcceptInvite:RegisterPressCallback(AcceptInviteClicked)
     LeaveFamily:RegisterPressCallback(LeaveFamilyClicked)
+    Invite.visible = false
+    AcceptInvite.visible = false
+    LeaveFamily.visible = false
 end

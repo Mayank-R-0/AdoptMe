@@ -307,7 +307,10 @@ function self:ClientAwake()
 			-- Characters should block taps
 			if hit.collider.gameObject:GetComponentInParent(Character) then
                 --print("Clicked Player", hit.collider.gameObject.name)
+				if hit.collider.gameObject:GetComponentInParent(Character).player == client.localPlayer then return end
+
                 gameplayManager.CharacterClicked(hit.collider.gameObject:GetComponentInParent(Character).player)
+				
 				return
 			end
 		end

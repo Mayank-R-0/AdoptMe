@@ -9,6 +9,10 @@ local Events = require("Events")
 --!SerializeField
 local UIManager : GameObject = nil
 
+local currentPlayerClicked = nil
+
+local CurrentInvitation = nil
+
 local RoleUpdateRequest = Event.new("RoleUpdateRequest")
 
 local CreateFamilyRequest = Event.new("CreateFamilyRequest")
@@ -16,6 +20,18 @@ local CreateFamilyResponse = Event.new("CreateFamilyResponse")
 
 local InviteFamilyRequest = Event.new("InviteFamilyRequest")
 local InviteFamilyEvent = Event.new("InviteFamilyEvent")
+
+local AcceptInviteRequest = Event.new("AcceptInviteRequest")
+local AcceptInviteEvent = Event.new("AcceptInviteEvent")
+
+local LeaveFamilyRequest = Event.new("LeaveFamiyRequest")
+local LeaveFamilyEvent = Event.new("LeaveFamiyEvent")
+
+
+
+function printMessage(position, messageOwner, message)
+    print(position .. " : " .. messageOwner .. " : " .. message)
+end
 
 function trackPlayers(characterCallback)
     
@@ -50,26 +66,92 @@ end
 function bindServerFiredEventsOnClient()
     
     Events.getEvent("ClientConnectionEvent"):Connect(function(player)
-        print("Player Connected", player.name)
+        if(player ~= client.localPlayer) then return end
+        printMessage("Client", player.name, "Player Connected" .. player.name)
 
         UIManager:GetComponent("UI_Main"):enableChoicePanel()
     end)
 
     CreateFamilyResponse:Connect(function(familyOwner, familyInfo)
         if familyOwner ~= client.localPlayer then return end
-        print("familyCreated", familyInfo.familyName)
+        printMessage("Client", familyOwner.name, "familyCreated " .. familyInfo.familyName)
 
         myFamily = familyInfo
+        printMessage("Client", familyOwner.name, "family name : " .. myFamily.familyName)
+        UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
     end)
 
-    InviteFamilyEvent:Connect(function(FromPlayer, ToPlayer)
+    InviteFamilyEvent:Connect(function(FromPlayer, ToPlayer, familyName)
         if ToPlayer ~= client.localPlayer then return end
         
-        print("Show invitation request on UI")
-        print("Family request from player : ", FromPlayer.name)
+        printMessage("Client", ToPlayer.name, "Show invitation request on UI")
+        printMessage("Client", ToPlayer.name, "Family request from player : " .. FromPlayer.name .. " - " .. familyName)
 
 
+        UIManager:GetComponent("UI_Main").SetAcceptInviteStateOpen(FromPlayer.name, familyName)
 
+        CurrentInvitation = {
+            fromPlayer = FromPlayer,
+            familyName = familyName
+        }
+
+    end)
+
+    AcceptInviteEvent:Connect(function(familyInfo) 
+        if familyInfo.familyMembers[client.localPlayer.name] == nil then return end
+
+        myFamily = familyInfo
+
+        UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
+
+        for k, v in myFamily.familyMembers do
+            printMessage("Client", client.localPlayer.name, "family member Accept " .. v.name)
+        end
+            
+    end)
+
+    LeaveFamilyEvent:Connect(function(FamilyMember, familyinfo)
+    
+
+        --printMessage("Client", client.localPlayer.name, "Memeber name" .. FamilyMember.name .. " family info " .. familyinfo.familyName)
+
+
+        if(familyinfo.familyMembers[client.localPlayer.name] == nil) then
+            if(familyinfo.familyName == myFamily.familyName) then
+                printMessage("Client", client.localPlayer.name, "Leaving Family")
+                myFamily = nil
+                UIManager:GetComponent("UI_Main").SetCreateFamilyStateOpen()
+            end
+        elseif(familyinfo.familyName == myFamily.familyName) then
+            myFamily = familyinfo
+        end
+
+        if myFamily == nil then return end
+
+        for k, v in familyinfo.familyMembers do
+            printMessage("Client", client.localPlayer.name, v.name)
+        end
+        -- if i'm the last one in family
+        -- if someone else left the family
+        -- 
+
+        -- if familyinfo == nil then 
+        --     if FamilyMember == client.localPlayer then
+        --         myFamily = nil 
+        --         UIManager:GetComponent("UI_Main").SetCreateFamilyStateOpen()
+        --         return
+        --     end
+        -- elseif (familyinfo.familyMembers[FamilyMember.name] == nil) then
+        --     myFamily = nil
+        -- elseif (familyinfo.familyName == myFamily.familyName) then
+        --     myFamily = familyinfo
+        -- end
+
+        -- if myFamily == nil then return end
+
+        -- for k, v in myFamily.familyMembers do
+        --     printMessage("Client", client.localPlayer.name, "family member Leave " .. v.name)
+        -- end
     end)
 
 end
@@ -99,11 +181,25 @@ function self:ClientAwake()
     end
 
     function CharacterClicked(clickedPlayer)
-        UIManager:GetComponent("UI_Main").AddInvitePopup(clickedPlayer)
+        currentPlayerClicked = clickedPlayer
+        UIManager:GetComponent("UI_Main").SetInviteStateOpen(currentPlayerClicked.name)
+        --UIManager:GetComponent("UI_Main").AddInvitePopup(clickedPlayer)
     end
 
     function CreateFamilyFromClient(familyName)
         CreateFamilyRequest:FireServer(familyName)
+    end
+
+    function InviteFamilyFromClient(familyName)
+        InviteFamilyRequest:FireServer(currentPlayerClicked, familyName)
+    end
+
+    function AcceptInviteFromClient()
+        AcceptInviteRequest:FireServer(CurrentInvitation.fromPlayer, CurrentInvitation.familyName)
+    end
+
+    function LeaveFamilyFromClient()
+        LeaveFamilyRequest:FireServer(myFamily.familyName)
     end
 
     trackPlayers(OnCharacterInstantiate)
@@ -125,19 +221,48 @@ function bindClientFiredRequestsOnServer()
     end)
 
     CreateFamilyRequest:Connect(function(familyOwner, familyName)
-            families[familyName] = {
-                familyName = familyName,
-                familyId = tostring(familyName) .. tostring(math.random(0, 1000)),
-                familyMembers = {
-                    familyOwner
-                }
+        printMessage("Server", familyOwner.name, familyOwner.name .. " - " .. familyName)
+        families[familyName] = {
+            familyName = familyName,
+            familyId = tostring(familyName) .. tostring(math.random(0, 1000)),
+            familyMembers = {
+                [familyOwner.name] = familyOwner
             }
-            local familyInfo = families[familyName]
-            CreateFamilyResponse:FireAllClients(familyOwner, familyInfo)
+        }
+        local familyInfo = families[familyName]
+        CreateFamilyResponse:FireAllClients(familyOwner, familyInfo)
     end)
 
-    InviteFamilyRequest:Connect(function(FromPlayer, ToPlayer)
-        InviteFamilyEvent:FireAllClients(FromPlayer, ToPlayer)
+    InviteFamilyRequest:Connect(function(FromPlayer, ToPlayer, familyName)
+        InviteFamilyEvent:FireAllClients(FromPlayer, ToPlayer, familyName)
+    end)
+
+    AcceptInviteRequest:Connect(function(AcceptingPlayer, FamilyOwner, familyName)
+
+        printMessage("Server", AcceptingPlayer.name, AcceptingPlayer.name .. " - " .. FamilyOwner.name .. " - " .. familyName)
+
+        if(families[familyName]) then
+            families[familyName].familyMembers[AcceptingPlayer.name] = AcceptingPlayer
+        end
+
+        AcceptInviteEvent:FireAllClients(families[familyName])
+        
+        for k, v in pairs(families[familyName].familyMembers) do
+            printMessage("Server", AcceptingPlayer.name, "Pring........." .. v.name)
+        end
+    end)
+
+    LeaveFamilyRequest:Connect(function(FamilyMember, familyName)
+        printMessage("Server", FamilyMember.name, "Leave family requested by " .. FamilyMember.name .. "From Family " .. familyName) 
+        families[familyName].familyMembers[FamilyMember.name] = nil
+        -- if(#families[familyName].familyMembers <= 0) then
+        --     families[familyName] = nil
+        -- end
+
+        local familyinfo = families[familyName]
+
+        LeaveFamilyEvent:FireAllClients(FamilyMember, familyinfo)
+
     end)
 
 end
