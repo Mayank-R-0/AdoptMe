@@ -34,7 +34,42 @@ local Button3Text : UILabel = nil
 --!Bind
 local Button4Text : UILabel = nil
 
+--!Bind
+local MessageBox : VisualElement = nil
+--!Bind
+local MessageText : UILabel = nil
+
+--!Bind
+local MessageBoxWithConfirmation : VisualElement = nil
+--!Bind
+local ConfirmationBoxMessage : UILabel = nil
+--!Bind
+local ConfirmButton : UIButton = nil
+--!Bind
+local ConfirmationButtonText : UILabel = nil
+--!Bind
+local CancelButton : UIButton = nil
+--!Bind
+local CancelButtonText : UILabel = nil
+
+local familyName = nil
+
 local GameplayManager = require("GameplayManager")
+
+function ShowConfirmationMessage(message, ConfirmationAction, CancelAction)
+    ConfirmationBoxMessage:SetPrelocalizedText(message, false)
+    ConfirmationButtonText:SetPrelocalizedText("Confirm", false)
+    CancelButtonText:SetPrelocalizedText("Cancel", false)
+    ConfirmButton:RegisterPressCallback(function() ConfirmationAction() MessageBoxWithConfirmation.visible = false end)
+    CancelButton:RegisterPressCallback(function() CancelAction() MessageBoxWithConfirmation.visible = false end)
+    MessageBoxWithConfirmation.visible = true
+end
+
+function ShowMessage(message)
+    MessageText:SetPrelocalizedText(message, false)
+    MessageBox.visible = true
+    Timer.After(5, function() MessageBox.visible = false end)
+end
 
 function ParentButtonPressed()
     GameplayManager.ChangeRole(0)
@@ -50,7 +85,7 @@ function AddInvitePopup(player)
 end
 
 function enableChoicePanel()
-    --ChoicePanel.visible = true
+    ChoicePanel.visible = true
 end
 
 function handlePanelState(panel, state)
@@ -59,13 +94,14 @@ end
 
 function CreateFamilyClicked()
     print("CreateFamilyClicked")
-    GameplayManager.CreateFamilyFromClient("MyNewFamily")
+    familyName = "MyNewFamily" .. tostring(math.random(1, 1000))
+    GameplayManager.CreateFamilyFromClient(familyName)
     CreateFamily.visible = false
 end
 
 function InviteFamilyClicked()
     print("InviteFamilyClicked")
-    GameplayManager.InviteFamilyFromClient("MyNewFamily")
+    GameplayManager.InviteFamilyFromClient(familyName)
     Invite.visible = false
 end
 
@@ -119,4 +155,7 @@ function self:ClientAwake()
     Invite.visible = false
     AcceptInvite.visible = false
     LeaveFamily.visible = false
+    CreateFamily.visible = false
+    MessageBox.visible = false
+    MessageBoxWithConfirmation.visible = false
 end

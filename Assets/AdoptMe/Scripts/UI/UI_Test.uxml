@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" hr="Highrise.UI" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AdoptMe/Scripts/UI/UI_Test.uss?fileID=7433441132597879392&amp;guid=c5285eb330d03f244ad140dfe7b573c6&amp;type=3#UI_Test" />
     <ui:VisualElement name="MainContainer" style="flex-grow: 1; justify-content: flex-start; align-items: stretch; display: flex; visibility: visible; overflow: visible; position: relative; flex-direction: column; flex-wrap: nowrap; align-self: auto; -unity-text-align: upper-left;">
-        <ui:VisualElement name="ChoicePanelContainer" style="flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:VisualElement name="ChoicePanelContainer" style="flex-grow: 1; align-items: center; justify-content: center; display: none;">
             <ui:VisualElement name="ChoicePanel" style="flex-grow: 1; position: absolute; width: 550px; height: 330px; background-color: rgb(255, 255, 255); flex-direction: column; flex-wrap: nowrap; display: flex; visibility: visible; overflow: visible; align-items: stretch; justify-content: flex-start; align-self: auto;">
                 <ui:Label tabindex="-1" text="Choose a role :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PanelTitle" style="font-size: 40px; -unity-font-style: bold; -unity-text-align: middle-center; position: absolute; width: 550px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 60px;" />
                 <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: row; position: absolute; align-self: center; top: 80px;">
@@ -20,11 +20,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement name="PlayerPopup" style="flex-grow: 1; position: relative; width: 300px; height: 150px; align-items: center; justify-content: center; display: flex; align-self: auto;">
-        <ui:VisualElement style="flex-grow: 1; position: absolute;">
-            <ui:Label tabindex="-1" text="NewPlayer" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerName" style="font-size: 30px; align-items: stretch; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
-            <ui:Button text="Invite To Family" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 20px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; font-size: 20px; -unity-font-style: bold;" />
-        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1;" />
     </ui:VisualElement>
 </ui:UXML>

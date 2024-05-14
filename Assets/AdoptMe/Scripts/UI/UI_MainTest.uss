@@ -1,0 +1,39 @@
+.-main-test {
+}
+
+.caaa {
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.butt {
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-image: url("project://database/Assets/AdoptMe/Assets/UI/Family.png?fileID=2800000&guid=01344dcdb2f31ee4db1961255aefc544&type=3#Family");
+    -unity-slice-scale: 1px;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.butt {
+    background-color: rgba(255, 255, 255, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}

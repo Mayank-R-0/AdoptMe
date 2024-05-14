@@ -78,7 +78,7 @@ function bindServerFiredEventsOnClient()
 
         myFamily = familyInfo
         printMessage("Client", familyOwner.name, "family name : " .. myFamily.familyName)
-        UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
+        --UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
     end)
 
     InviteFamilyEvent:Connect(function(FromPlayer, ToPlayer, familyName)
@@ -88,7 +88,7 @@ function bindServerFiredEventsOnClient()
         printMessage("Client", ToPlayer.name, "Family request from player : " .. FromPlayer.name .. " - " .. familyName)
 
 
-        UIManager:GetComponent("UI_Main").SetAcceptInviteStateOpen(FromPlayer.name, familyName)
+        --UIManager:GetComponent("UI_Main").SetAcceptInviteStateOpen(FromPlayer.name, familyName)
 
         CurrentInvitation = {
             fromPlayer = FromPlayer,
@@ -102,7 +102,7 @@ function bindServerFiredEventsOnClient()
 
         myFamily = familyInfo
 
-        UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
+        --UIManager:GetComponent("UI_Main").SetLeaveStateOpen(myFamily.familyName)
 
         for k, v in myFamily.familyMembers do
             printMessage("Client", client.localPlayer.name, "family member Accept " .. v.name)
@@ -113,6 +113,7 @@ function bindServerFiredEventsOnClient()
     LeaveFamilyEvent:Connect(function(FamilyMember, familyinfo)
     
 
+        if myFamily == nil then return end
         --printMessage("Client", client.localPlayer.name, "Memeber name" .. FamilyMember.name .. " family info " .. familyinfo.familyName)
 
 
@@ -120,38 +121,16 @@ function bindServerFiredEventsOnClient()
             if(familyinfo.familyName == myFamily.familyName) then
                 printMessage("Client", client.localPlayer.name, "Leaving Family")
                 myFamily = nil
-                UIManager:GetComponent("UI_Main").SetCreateFamilyStateOpen()
+                --UIManager:GetComponent("UI_Main").SetCreateFamilyStateOpen()
             end
         elseif(familyinfo.familyName == myFamily.familyName) then
             myFamily = familyinfo
         end
 
-        if myFamily == nil then return end
 
         for k, v in familyinfo.familyMembers do
             printMessage("Client", client.localPlayer.name, v.name)
         end
-        -- if i'm the last one in family
-        -- if someone else left the family
-        -- 
-
-        -- if familyinfo == nil then 
-        --     if FamilyMember == client.localPlayer then
-        --         myFamily = nil 
-        --         UIManager:GetComponent("UI_Main").SetCreateFamilyStateOpen()
-        --         return
-        --     end
-        -- elseif (familyinfo.familyMembers[FamilyMember.name] == nil) then
-        --     myFamily = nil
-        -- elseif (familyinfo.familyName == myFamily.familyName) then
-        --     myFamily = familyinfo
-        -- end
-
-        -- if myFamily == nil then return end
-
-        -- for k, v in myFamily.familyMembers do
-        --     printMessage("Client", client.localPlayer.name, "family member Leave " .. v.name)
-        -- end
     end)
 
 end
@@ -182,7 +161,15 @@ function self:ClientAwake()
 
     function CharacterClicked(clickedPlayer)
         currentPlayerClicked = clickedPlayer
-        UIManager:GetComponent("UI_Main").SetInviteStateOpen(currentPlayerClicked.name)
+
+        if(myFamily ~= nil) then
+            if (myFamily.familyMembers[currentPlayerClicked.name] == nil) then
+                --UIManager:GetComponent("UI_Main").SetInviteStateOpen(currentPlayerClicked.name)
+            else 
+                --UIManager:GetComponent("UI_Main").ShowMessage("Already in family")
+            end
+        end
+
         --UIManager:GetComponent("UI_Main").AddInvitePopup(clickedPlayer)
     end
 
@@ -191,11 +178,21 @@ function self:ClientAwake()
     end
 
     function InviteFamilyFromClient(familyName)
-        InviteFamilyRequest:FireServer(currentPlayerClicked, familyName)
+        InviteFamilyRequest:FireServer(currentPlayerClicked, myFamily.familyName)
     end
 
     function AcceptInviteFromClient()
-        AcceptInviteRequest:FireServer(CurrentInvitation.fromPlayer, CurrentInvitation.familyName)
+        if (myFamily ~= nil) then
+            local  message = "You are already in family " .. "'" .. myFamily.familyName .. "'" .. " You will be leaving and joining " .. CurrentInvitation.familyName
+            --[[UIManager:GetComponent("UI_Main").ShowConfirmationMessage(message, 
+                function() 
+                    LeaveFamilyFromClient()
+                    AcceptInviteRequest:FireServer(CurrentInvitation.fromPlayer, CurrentInvitation.familyName) end,
+                function() UIManager:GetComponent("UI_Main").ShowMessage("Invite Cancelled") end
+            )]]
+        else
+            AcceptInviteRequest:FireServer(CurrentInvitation.fromPlayer, CurrentInvitation.familyName)
+        end
     end
 
     function LeaveFamilyFromClient()

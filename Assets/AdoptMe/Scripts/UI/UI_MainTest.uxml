@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" hr="Highrise.UI" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AdoptMe/Scripts/UI/UI_MainTest.uss?fileID=7433441132597879392&amp;guid=4bf3f5a3d81636d46a297e205c7e708f&amp;type=3#UI_MainTest" />
+    <ui:VisualElement name="SideButtons" class="caaa" style="justify-content: flex-start; display: none;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="butt" style="background-color: rgba(255, 255, 255, 0);" />
+    </ui:VisualElement>
+    <ui:VisualElement name="FamilyPopup" style="flex-grow: 1;">
+        <ui:VisualElement name="FP_ScreenOne" style="flex-grow: 1; justify-content: center;">
+            <ui:VisualElement style="flex-grow: 1; background-color: rgb(255, 255, 255); width: 400px; height: 250px; align-self: center; left: auto; top: 25%; position: absolute; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; width: auto; align-self: flex-end; padding-top: 10px; align-items: center; position: absolute; min-height: auto; padding-bottom: 0; background-color: rgba(0, 0, 0, 0); transform-origin: center; top: auto; left: auto; margin-left: 0; margin-right: 0; padding-right: 10px;">
+                    <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-right: 0; padding-left: 0; background-color: rgb(0, 255, 253); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; padding-top: 0; padding-bottom: 0; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; color: rgb(255, 255, 255); -unity-font-style: bold; width: 40px; height: 40px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; width: auto; align-self: center; padding-top: 25px; align-items: center; position: relative; padding-bottom: 0;">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/AdoptMe/Assets/UI/Family.png?fileID=2800000&amp;guid=01344dcdb2f31ee4db1961255aefc544&amp;type=3#Family&quot;); width: 50px; height: 50px; position: relative; top: auto; left: auto; flex-direction: column; align-self: flex-start; justify-content: flex-start; align-items: stretch; -unity-background-scale-mode: stretch-to-fill; max-width: 50px; min-width: 50px; max-height: 50px; min-height: 50px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;" />
+                    <ui:Label tabindex="-1" text="Ready to create &#10;your own family?" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: flex-start; -unity-font-style: bold; font-size: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 5px; padding-right: 20px; padding-bottom: 5px; padding-left: 20px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; width: auto; align-self: center; padding-top: 0; align-items: center; position: relative; justify-content: flex-start;">
+                    <ui:Label tabindex="-1" text="Family Name" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 16px; -unity-font-style: bold;" />
+                    <ui:TextField picking-mode="Ignore" value="Name" focusable="true" style="max-width: none; align-items: stretch; align-self: center; width: 200px; -unity-text-align: middle-center; font-size: 16px; margin-right: 0; margin-top: 0; margin-bottom: 0; margin-left: 10px; -unity-text-outline-width: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; width: auto; align-self: center; padding-top: 0; align-items: center; position: relative; min-height: auto; padding-bottom: 25px; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Button text="Create Family" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-right: 35px; padding-left: 35px; background-color: rgb(0, 255, 253); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

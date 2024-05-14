@@ -40,6 +40,19 @@
         <hr:UIButton name="LeaveFamily" style="flex-grow: 1; align-self: bottom">
             <hr:UILabel name="Button4Text"/>
         </hr:UIButton>
+
+        <VisualElement name="MessageBox" style="flex-grow: 1; align-self: bottom">
+            <hr:UILabel name="MessageText" style="flex-grow: 1; align-self: bottom"/>
+        </VisualElement>
+        <VisualElement name="MessageBoxWithConfirmation" style="flex-grow: 1; align-self: bottom">
+            <hr:UILabel name="ConfirmationBoxMessage" style="flex-grow: 1; align-self: bottom"/>
+            <hr:UIButton name="ConfirmButton" style="flex-grow: 1; align-self: bottom">
+                <hr:UILabel name="ConfirmationButtonText"/>
+            </hr:UIButton>
+            <hr:UIButton name="CancelButton" style="flex-grow: 1; align-self: bottom">
+                <hr:UILabel name="CancelButtonText"/>
+            </hr:UIButton>
+        </VisualElement>
     </VisualElement>
   </hr:UILuaView>
 
